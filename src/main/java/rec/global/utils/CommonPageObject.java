@@ -132,7 +132,6 @@ public class CommonPageObject extends AbstractPageObject {
 	 * @since 12/04/2023
 	 */
 	public String takeScreenshot() throws Exception {
-		System.out.println("testone teo");
 		String timeStamp;
 		File src = ((ChromeDriver) driver).getScreenshotAs(OutputType.FILE);
 		File screenShotName;		

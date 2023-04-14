@@ -1,5 +1,9 @@
 package testcases;
 
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.AssertJUnit;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -18,7 +22,7 @@ public class RecruitmentTestCases extends CommonPageObject{
 	 */
 	@BeforeClass
 	public void launchApplication() throws Throwable{
-		Assert.assertTrue(launchWebsite(),"Error in Opening Website");
+		AssertJUnit.assertTrue("Error in Opening Website",launchWebsite());
 	}
 
 	/**
@@ -28,7 +32,7 @@ public class RecruitmentTestCases extends CommonPageObject{
 	 */
 	@Test(priority=1,testName="TC_01_Login", dataProvider="Login Details")
 	public void tc_01_loginDbox(String username, String password) {
-		Assert.assertTrue(login(username, password),"Error while Login");
+		AssertJUnit.assertTrue("Error while Login",login(username, password));
 		 
 	}
 
@@ -39,7 +43,7 @@ public class RecruitmentTestCases extends CommonPageObject{
 	 */
 	@Test(priority=2,testName="TC_02_NavigateToJobOpeningPage")
 	public void tc_02_navigatetoLink() {
-		Assert.assertTrue(clickOnLink(), "Error while composing the mail");
+		AssertJUnit.assertTrue(clickOnLink(), "Error while composing the mail");
 	}
 	
 	/**

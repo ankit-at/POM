@@ -43,7 +43,7 @@ public class RecruitmentTestCases extends CommonPageObject{
 	 */
 	@Test(priority=2,testName="TC_02_NavigateToJobOpeningPage")
 	public void tc_02_navigatetoLink() {
-		AssertJUnit.assertTrue(clickOnLink(), "Error while composing the mail");
+		AssertJUnit.assertTrue("Error while composing the mail", clickOnLink());
 	}
 	
 	/**

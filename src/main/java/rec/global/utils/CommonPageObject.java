@@ -1,4 +1,4 @@
-package rec.global.utils;
+package main.java.rec.global.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -235,8 +235,7 @@ public class CommonPageObject extends AbstractPageObject {
 
 		switch (browserName) {
 		case "chrome":
-			System.setProperty("webdriver.chrome.driver",
-					"/home/ankitt/eclipse-workapce_one/Intro/chromedriver_linux64_new/chromedriver");
+			//System.setProperty("webdriver.chrome.driver","/home/ankitt/eclipse-workapce_one/Intro/chromedriver_linux64_new/chromedriver");
 			//System.setProperty("org.uncommons.reportng.escape-output", "false");
 			driver = new ChromeDriver();
 			driver.manage().window().maximize();

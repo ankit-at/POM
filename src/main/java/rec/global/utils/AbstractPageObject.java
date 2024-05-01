@@ -1,4 +1,4 @@
-package rec.global.utils;
+package main.java.rec.global.utils;
 
 
 import java.io.FileNotFoundException;

@@ -1,16 +1,14 @@
-package testcases;
+package test.java.testcases;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeClass;
-import org.testng.AssertJUnit;
+
+
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import rec.global.utils.*;
+import main.java.rec.global.utils.*;
 
 public class RecruitmentTestCases extends CommonPageObject{
 
@@ -22,7 +20,7 @@ public class RecruitmentTestCases extends CommonPageObject{
 	 */
 	@BeforeClass
 	public void launchApplication() throws Throwable{
-		AssertJUnit.assertTrue("Error in Opening Website",launchWebsite());
+		Assert.assertTrue(launchWebsite(),"Error in Opening Website");
 	}
 
 	/**
@@ -32,7 +30,7 @@ public class RecruitmentTestCases extends CommonPageObject{
 	 */
 	@Test(priority=1,testName="TC_01_Login", dataProvider="Login Details")
 	public void tc_01_loginDbox(String username, String password) {
-		AssertJUnit.assertTrue("Error while Login",login(username, password));
+		Assert.assertTrue(login(username, password),"Error while Login");
 		 
 	}
 
@@ -43,7 +41,7 @@ public class RecruitmentTestCases extends CommonPageObject{
 	 */
 	@Test(priority=2,testName="TC_02_NavigateToJobOpeningPage")
 	public void tc_02_navigatetoLink() {
-		AssertJUnit.assertTrue(clickOnLink(), "Error while composing the mail");
+		Assert.assertTrue(clickOnLink(), "Error while composing the mail");
 	}
 	
 	/**

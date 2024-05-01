@@ -47,17 +47,25 @@ public class CommonPageObject extends AbstractPageObject {
 
 	}
 
-	@FindBy( id="UserLogin_username")
+	@FindBy( id="mectrl_headerPicture")
+	protected WebElement btnAccount;
+
+	
+	@FindBy( id="i0116")
 	protected WebElement txtUserName;
 
 
-	@FindBy( id="UserLogin_password")
+	@FindBy( id="i0118")
 	protected WebElement txtPassword;
 
-	@FindBy( id="login-submit")
-	protected WebElement btnSignIn;
+	@FindBy( id="idSIButton9")
+	protected WebElement btnNextnSignIn;
+	
 
-	@FindBy (linkText="Recruitment")
+	/*
+	 
+	  Commenting the code for now might use it in future
+	 @FindBy (linkText="Recruitment")
 	protected WebElement linkRecruitment;
 
 	@FindBy (xpath="//div[contains(text(),'Job Openings')]")
@@ -121,7 +129,7 @@ public class CommonPageObject extends AbstractPageObject {
 	protected WebElement textAreaJD;
 
 	@FindBy (id="saveContinue")
-	protected WebElement btnSaveContinue;
+	protected WebElement btnSaveContinue;*/
 
 
 	/**
@@ -242,8 +250,8 @@ public class CommonPageObject extends AbstractPageObject {
 			return driver;
 
 		case "firefox":
-			System.setProperty("webdriver.firefox.marionette",
-					workDir + "\\src\\test\\resources\\Drivers\\geckodriver.exe");
+			//System.setProperty("webdriver.firefox.marionette",
+				//	workDir + "\\src\\test\\resources\\Drivers\\geckodriver.exe");
 			System.setProperty("org.uncommons.reportng.escape-output", "false");
 			driver = new FirefoxDriver();
 			driver.manage().window().maximize();
@@ -267,7 +275,7 @@ public class CommonPageObject extends AbstractPageObject {
 	public boolean launchWebsite() throws Throwable{
 		try {
 			driver.manage().window().maximize();
-			driver.navigate().to("https://ta2.qa.darwinbox.io");
+			driver.navigate().to(config("URL"));
 			driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			test.log(LogStatus.PASS,test.addScreenCapture(takeScreenshot())+"Application Launched Successfully");
@@ -290,9 +298,11 @@ public class CommonPageObject extends AbstractPageObject {
 	public boolean login(String username, String password) {
 
 		try {
+			click(btnAccount,"Clicked on Account Btn");
 			sendKeys(txtUserName, username, "User Name TextField");
+			click(btnNextnSignIn, "Next on Password page");
 			sendKeys(txtPassword, password, "Password Field");
-			click(btnSignIn, "Sigin on Login Page");
+			click(btnNextnSignIn, "Sigin on Login Page");
 			test.addScreenCapture(takeScreenshot());
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -309,7 +319,8 @@ public class CommonPageObject extends AbstractPageObject {
 	 * @return
 	 * @since 12/04/2023
 	 */
-	public boolean clickOnLink() {
+	/*Commenting because of non usage of code
+	 * public boolean clickOnLink() {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(linkRecruitment));
 			click(linkRecruitment,"Recruitment Module");
@@ -321,6 +332,6 @@ public class CommonPageObject extends AbstractPageObject {
 			e.printStackTrace();
 			return false;
 		}
-	}
+	}*/
 }
 

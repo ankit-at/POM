@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import main.java.rec.global.utils.*;
 
-public class RecruitmentTestCases extends CommonPageObject{
+public class TestCases extends CommonPageObject{
 
 	/**
 	 * This is used to instantiate the browser and launch the application
@@ -18,7 +18,7 @@ public class RecruitmentTestCases extends CommonPageObject{
 	 * @throws Throwable 
 	 * @since 12/04/2023
 	 */
-	@BeforeClass
+	@BeforeClass()
 	public void launchApplication() throws Throwable{
 		Assert.assertTrue(launchWebsite(),"Error in Opening Website");
 	}
@@ -29,7 +29,7 @@ public class RecruitmentTestCases extends CommonPageObject{
 	 * @since 12/04/2023
 	 */
 	@Test(priority=1,testName="TC_01_Login", dataProvider="Login Details")
-	public void tc_01_loginDbox(String username, String password) {
+	public void tc_01_loginDbox(String username, String password, String URL) {
 		Assert.assertTrue(login(username, password),"Error while Login");
 		 
 	}
@@ -39,10 +39,10 @@ public class RecruitmentTestCases extends CommonPageObject{
 	 * @author ankit
 	 * @since 12/04/2023
 	 */
-	@Test(priority=2,testName="TC_02_NavigateToJobOpeningPage")
+	/*@Test(priority=2,testName="TC_02_NavigateToJobOpeningPage")
 	public void tc_02_navigatetoLink() {
 		Assert.assertTrue(clickOnLink(), "Error while composing the mail");
-	}
+	}*/
 	
 	/**
 	 * This method is to close browser the method post class is over 
@@ -65,7 +65,7 @@ public class RecruitmentTestCases extends CommonPageObject{
 	 */
 	@DataProvider(name="Login Details")
 	public Object[][] loginDetails() {
-		Object[][] parameters= {{config("username"),config("password")}};
+		Object[][] parameters= {{config("username"),config("password"),config("URL")}};
 		return parameters;
 	}
 	

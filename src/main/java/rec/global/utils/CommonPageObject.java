@@ -9,6 +9,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.io.FileHandler;
@@ -28,6 +29,7 @@ public class CommonPageObject extends AbstractPageObject {
 	public Actions action;
 	public ExtentTest test;
 	public ExtentReports report;
+	ChromeOptions options;
 
 	public boolean status=false;
 	/**
@@ -202,7 +204,7 @@ public class CommonPageObject extends AbstractPageObject {
 	public boolean click(WebElement element, String strtext) {
 		try {
 			element.click();
-			test.log(LogStatus.PASS,test.addScreenCapture(takeScreenshot())+strtext + " is clicked Successfully");
+			test.log(LogStatus.PASS,strtext+" is clicked Successfully");
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -245,7 +247,10 @@ public class CommonPageObject extends AbstractPageObject {
 		case "chrome":
 			//System.setProperty("webdriver.chrome.driver","/home/ankitt/eclipse-workapce_one/Intro/chromedriver_linux64_new/chromedriver");
 			//System.setProperty("org.uncommons.reportng.escape-output", "false");
-			driver = new ChromeDriver();
+			options= new ChromeOptions();
+			options.addArguments("--remote-allow-origins=*");
+			
+			driver = new ChromeDriver(options);
 			driver.manage().window().maximize();
 			return driver;
 
@@ -274,11 +279,10 @@ public class CommonPageObject extends AbstractPageObject {
 	 */
 	public boolean launchWebsite() throws Throwable{
 		try {
-			driver.manage().window().maximize();
 			driver.navigate().to(config("URL"));
 			driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-			test.log(LogStatus.PASS,test.addScreenCapture(takeScreenshot())+"Application Launched Successfully");
+			test.log(LogStatus.PASS,"Application Launched Successfully");
 		} catch (Exception e) {
 			e.printStackTrace();
 			test.log(LogStatus.FAIL,test.addScreenCapture(takeScreenshot())+"Exception while Launching application");
@@ -303,7 +307,9 @@ public class CommonPageObject extends AbstractPageObject {
 			click(btnNextnSignIn, "Next on Password page");
 			sendKeys(txtPassword, password, "Password Field");
 			click(btnNextnSignIn, "Sigin on Login Page");
-			test.addScreenCapture(takeScreenshot());
+			
+			test.log(LogStatus.PASS,test.addScreenCapture(takeScreenshot())+" Login Successful");
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;

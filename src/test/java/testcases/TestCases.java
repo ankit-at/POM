@@ -1,7 +1,5 @@
 package test.java.testcases;
 
-
-
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -21,6 +19,8 @@ public class TestCases extends CommonPageObject{
 	@BeforeClass()
 	public void launchApplication() throws Throwable{
 		Assert.assertTrue(launchWebsite(),"Error in Opening Website");
+
+
 	}
 
 	/**
@@ -30,8 +30,7 @@ public class TestCases extends CommonPageObject{
 	 */
 	@Test(priority=1,testName="TC_01_Login", dataProvider="Login Details")
 	public void tc_01_loginDbox(String username, String password, String URL) {
-		Assert.assertTrue(login(username, password),"Error while Login");
-		 
+		Assert.assertTrue(login(username, password),"Error while Login");		 
 	}
 
 	/**

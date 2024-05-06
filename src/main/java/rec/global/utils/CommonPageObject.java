@@ -63,7 +63,14 @@ public class CommonPageObject extends AbstractPageObject {
 	@FindBy( id="idSIButton9")
 	protected WebElement btnNextnSignIn;
 	
-
+	@FindBy( id ="meInitialsButton")
+	protected WebElement btnProfile;
+	
+	@FindBy( id ="kmsiTitle")
+	protected WebElement textIntermmitentPage;
+	
+	@FindBy (id="declineButton")
+	protected WebElement btnDecline;
 	/*
 	 
 	  Commenting the code for now might use it in future
@@ -175,6 +182,23 @@ public class CommonPageObject extends AbstractPageObject {
 			Thread.sleep(2000);
 			test.log(LogStatus.PASS,strtext + " text is inserted successfully");
 			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			test.log(LogStatus.FAIL,"Exception while inserting " + strtext);
+			return false;
+		}
+	}
+	
+	public boolean elementexists(WebElement element, String strtext) {
+		try {
+			
+			if(element.getText().equals(strtext)){
+			test.log(LogStatus.PASS,"Text"+strtext + " text matches");
+			return true;}
+			else {
+				test.log(LogStatus.PASS,"Text"+strtext + " text doesn't match");
+			return false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			test.log(LogStatus.FAIL,"Exception while inserting " + strtext);
@@ -307,6 +331,12 @@ public class CommonPageObject extends AbstractPageObject {
 			click(btnNextnSignIn, "Next on Password page");
 			sendKeys(txtPassword, password, "Password Field");
 			click(btnNextnSignIn, "Sigin on Login Page");
+			boolean check = elementexists(textIntermmitentPage, "Stay signed in?");
+			if(check==true) {
+				click(btnDecline,"No on intermittent page");
+			}
+			wait.until(ExpectedConditions.visibilityOf(btnProfile));
+
 			
 			test.log(LogStatus.PASS,test.addScreenCapture(takeScreenshot())+" Login Successful");
 			
